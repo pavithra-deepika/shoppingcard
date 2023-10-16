@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Header() {
+function Header(props) {
   return (
     <div className='flex shopping-cart'>
-        <div> Shopping Cart App</div>
-        <div>
+        <div onClick={() => props.handleShow(false)}> Shopping Cart App</div>
+        <div onClick={() => props.handleShow(true)}>
             Cart
-        <sup>{'3'}</sup>
+        <sup>{props.count}</sup>
         </div>
     </div>
   )

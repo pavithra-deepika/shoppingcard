@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from './Component/Header';
 import ProductList from './Component/ProductList';
+import CartList from './Component/CartList';
 
 function App() {
   const [product, setProduct] = useState([
@@ -51,15 +52,28 @@ function App() {
   ])
   
   const[cart, setCart]=useState([])
+  const [showCart, setShowCart] =useState(false)
+const handleShow =(value) => {
+  setShowCart(value)
+
+}
+
+
   console.log('cart',cart)
   const addToCart = (data) => {
-    setCart([...cart, data])
+    setCart([...cart, {...data, quantity: 1}])
 console.log('data',data)
   }
   return (
     <div>
-      <Header setProduct={setProduct}/>
-      <ProductList product={product} addToCart={addToCart} />
+      <Header count={cart.length}
+       handleShow={handleShow} 
+       setProduct={setProduct}/>
+      {
+        showCart ?
+          <CartList cart={cart} /> :
+          <ProductList product={product} addToCart={addToCart} />
+      }
     </div>
   )
 }
