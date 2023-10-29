@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function CartList({cart}) {
+  const[CART, setCART] = useState([])
+  useEffect(() =>{
+        setCART(cart)
+  } , [CART]
+  )
   return (
     <div>
         {
-            cart.map((cartItem, cartIndex) =>
+            CART.map((cartItem, cartIndex) =>
             {
                 return(
                     <div>
@@ -18,6 +23,13 @@ function CartList({cart}) {
                 )
             })
         }
+        <p>
+          Total <span></span>
+        {
+          cart.map(item => item.price * item.quantity).reduce((total, value) => total + value, 0)
+
+        }
+        </p>
     </div>
   )
 }
