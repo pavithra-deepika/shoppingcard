@@ -6,7 +6,7 @@ import ProductList from './Component/ProductList';
 import CartList from './Component/CartList';
 
 function App() {
-  const [product, setProduct] = useState([
+  const [products, setProducts] = useState([
     {
       url: 'https://rukminim1.flixcart.com/image/300/300/l51d30w0/shoe/z/w/c/10-mrj1914-10-aadi-white-black-red-original-imagft9k9hydnfjp.jpeg?q=70',
       name: 'TRQ White Shoes',
@@ -50,6 +50,7 @@ function App() {
       price: 100
     },
   ])
+
   
   const[cart, setCart]=useState([])
   const [showCart, setShowCart] =useState(false)
@@ -60,6 +61,7 @@ const handleShow =(value) => {
 
 
   console.log('cart',cart)
+
   const addToCart = (data) => {
     setCart([...cart, {...data, quantity: 1}])
 console.log('data',data)
@@ -68,12 +70,16 @@ console.log('data',data)
     <div>
       <Header count={cart.length}
        handleShow={handleShow} 
-       setProduct={setProduct}/>
+       setProducts={setProducts}/>
+       <div className='flex'>
       {
         showCart ?
           <CartList cart={cart} /> :
+          products.map((product) => 
           <ProductList product={product} addToCart={addToCart} />
+          )
       }
+       </div>
     </div>
   )
 }

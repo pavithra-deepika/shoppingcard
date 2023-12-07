@@ -1,29 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../App.css'
 
 function ProductList({product, addToCart}) {
+    const [disable, setDisable] = useState(false)
+
     console.log("ooo", product)
     
   return (
-    <div className='flex'>
-            {
-                product.map((productItem, productIndex) => {
-                    return (
-                        <div style={{ width: '33%' }}>
-                            <div className='product-item'>
-                                <img src={productItem.url}  alt='no iamge' width="100%" />
-                                <p>{productItem.name} | {productItem.category} </p>
-                                <p> {productItem.seller} </p>
-                                <p> Rs. {productItem.price} /-</p>
-                                <button
-                                    onClick={() => addToCart(productItem)}
-                                >Add To Cart</button>
-                            </div>
-                        </div>
-                    )
-                })
-            }
-        </div>
+    <div >
+    <div className='product-item'>
+    <img src={product.url}  alt='no iamge' width="80%" height={200} />
+    <p>{product.name} | {product.category} </p>
+    <p> {product.seller} </p>
+    <p> Rs. {product.price} /-</p>
+    <button disabled={disable}
+        onClick={() => {setDisable(true); addToCart(product)}}
+    >Add To Cart</button>
+</div>
+      </div>
+     
   )
 }
 
